@@ -43,7 +43,7 @@ class ShowCaseWidget extends StatefulWidget {
   final double blurValue;
   final bool enableAutoScroll;
 
-  const ShowCaseWidget({
+  const ShowCaseWidget({Key? key, 
     required this.builder,
     this.onFinish,
     this.onStart,
@@ -56,7 +56,7 @@ class ShowCaseWidget extends StatefulWidget {
     this.disableAnimation = false,
     this.enableAutoScroll = false,
     this.disableBarrierInteraction = false,
-  });
+  }) : super(key: key);
 
   static GlobalKey? activeTargetWidget(BuildContext context) {
     return context

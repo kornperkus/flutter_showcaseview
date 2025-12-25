@@ -127,13 +127,13 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
         Theme
             .of(context)
             .textTheme
-            .headline6!
+            .titleLarge!
             .merge(TextStyle(color: widget.textColor));
     final descriptionStyle = widget.descTextStyle ??
         Theme
             .of(context)
             .textTheme
-            .subtitle2!
+            .titleSmall!
             .merge(TextStyle(color: widget.textColor));
     final titleLength = widget.title == null
         ? 0
@@ -359,8 +359,8 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
                                               Theme
                                                   .of(context)
                                                   .textTheme
-                                                  .headline6!
-                                                  .merge(
+                                                  .titleLarge
+                                                  ?.merge(
                                                 TextStyle(
                                                   color: widget.textColor,
                                                 ),
@@ -370,8 +370,6 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
                                         Align(
                                           alignment: Alignment.topRight,
                                           child: InkWell(
-                                              child: Icon(Icons.cancel,
-                                                color: Colors.red,),
                                               // onTap: (){
                                               //   AwesomeDialog(
                                               //       context: context,
@@ -383,7 +381,9 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
                                               //   btnOkOnPress: () {},
                                               //   )..show();
                                               // }
-                                              onTap: widget.onclose
+                                              onTap: widget.onclose,
+                                              child: const Icon(Icons.cancel,
+                                                color: Colors.red,)
                                           ),
                                         ),
                                       ],
@@ -395,8 +395,8 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
                                           Theme
                                               .of(context)
                                               .textTheme
-                                              .subtitle2!
-                                              .merge(
+                                              .titleSmall
+                                              ?.merge(
                                             TextStyle(
                                               color: widget.textColor,
                                             ),
@@ -406,7 +406,7 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
                                       widget.description!,
                                     ),
                                     CheckboxListTile(
-                                      contentPadding: EdgeInsets.all(0),
+                                      contentPadding: const EdgeInsets.all(0),
                                       title: const Text("ไม่ต้องแสดงอีก",
                                         style: TextStyle(
                                           color: Colors.black,
@@ -418,7 +418,7 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
                                         final prefs = await SharedPreferences.getInstance();
                                         await prefs.setBool('dontShowAgain', newValue!);
                                         setState(() {
-                                          isCheckBox = newValue!;
+                                          isCheckBox = newValue;
                                         });
 
                                       },
@@ -435,22 +435,23 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
 
                                       if( widget.isShowBtnPrevious == true)
                                         Align(
-                                          child: OutlinedButton(
-                                              child: const Text('ย้อนกลับ'),
-                                              onPressed: widget.caseViewPrevious
-                                          ),
                                           alignment: Alignment.topLeft,
+                                          child: OutlinedButton(
+                                              onPressed: widget.caseViewPrevious,
+                                              child: const Text('ย้อนกลับ')
+                                          ),
                                         ),
 
 
                                       if( widget.isShowBtnNext == true)
 
                                         Align(
+                                          alignment: Alignment.topRight,
                                           child: ElevatedButton(
                                             style: ElevatedButton.styleFrom(
-                                              primary: Color.fromRGBO(
+                                              backgroundColor: const Color.fromRGBO(
                                                   37, 142, 166, 1),
-                                              textStyle: TextStyle(
+                                              textStyle: const TextStyle(
                                                 // fontSize: 30,
                                                   fontWeight: FontWeight.bold,
                                                   fontFamily: "Kanit"
@@ -460,7 +461,6 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
 
                                             child: const Text('ถัดไป'),
                                           ),
-                                          alignment: Alignment.topRight,
                                         ),
                                     ],
                                     )
